@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -17,12 +18,11 @@ public class HealthController {
 
     @GetMapping("/health")
     @Operation(summary = "Health check", description = "Returns service status")
-    public ResponseEntity<ApiResponse<Map<String, String>>> healthCheck() {
-        Map<String, String> healthData = Map.of(
-                "status", "UP",
-                "service", "AI Subscription Intelligence Platform"
-        );
-        return ResponseEntity.ok(ApiResponse.success(healthData));
+    public ResponseEntity<ApiResponse<Map<String, Object>>> healthCheck() {
+        Map<String, Object> healthData = new LinkedHashMap<>();
+        healthData.put("status", "UP");
+        healthData.put("service", "SubscriptIQ Platform");
+        healthData.put("version", "1.0.0");
+        return ResponseEntity.ok(ApiResponse.success("Service is healthy and operational", healthData));
     }
 }
-

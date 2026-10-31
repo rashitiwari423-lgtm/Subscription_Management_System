@@ -1,0 +1,62 @@
+# ==============================================================================
+# SubscriptIQ — Production Profile Configuration (application-prod.yml)
+# ==============================================================================
+
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT:3306}/${DB_NAME}?useSSL=true&requireSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=false
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX:20}
+      minimum-idle: ${DB_POOL_MIN:5}
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1800000
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: false
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    clean-disabled: true
+
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-stacktrace: never
+    include-message: never
+    include-binding-errors: never
+
+logging:
+  level:
+    root: INFO
+    com.subscriptiq: INFO
+    org.springframework.security: WARN
+    org.hibernate: WARN
+    org.flywaydb: INFO
+
+application:
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+    cors:
+      allowed-origins: ${CORS_ALLOWED_ORIGINS}
+    rate-limit:
+      enabled: ${RATE_LIMIT_ENABLED:true}
+      requests-per-minute: ${RATE_LIMIT_RPM:60}
+
+subscriptiq:
+  billing:
+    scheduler:
+      enabled: ${BILLING_SCHEDULER_ENABLED:true}
+      cron: ${BILLING_SCHEDULER_CRON:0 0 1 * * *}
+    invoice:
+      due-days: ${INVOICE_DUE_DAYS:7}
