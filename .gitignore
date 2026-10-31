@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+target/
+**/target/
+build/
+**/build/
+
+# Logs
+*.log
+**/*.log
+
+# Environment variables & secrets
+.env
+**/.env
+.env.local
+.env.*.local
+
+# OS & Editor
+.DS_Store
+**/.DS_Store
+.idea/
+**/.idea/
+.vscode/
+**/.vscode/

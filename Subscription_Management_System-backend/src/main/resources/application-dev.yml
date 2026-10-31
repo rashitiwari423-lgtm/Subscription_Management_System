@@ -1,0 +1,25 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+application:
+  bootstrap:
+    demo-users:
+      enabled: ${DEMO_USERS_ENABLED:true}
+
+logging:
+  level:
+    com.subscriptiq: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.flywaydb: DEBUG
+
+subscriptiq:
+  billing:
+    scheduler:
+      enabled: ${BILLING_SCHEDULER_ENABLED:true}
+      cron: ${BILLING_SCHEDULER_CRON:0 0 1 * * *}
+    invoice:
+      due-days: ${INVOICE_DUE_DAYS:7}

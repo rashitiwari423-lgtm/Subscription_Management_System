@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #f8f9ff;
+    color: #0b1c30;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c7c4d8;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #777587;
+  }
+
+  ::selection {
+    background: #e2dfff;
+    color: #0f0069;
+  }
+}
+
+@layer components {
+  /* Button variants */
+  .btn-primary {
+    @apply bg-primary-container hover:bg-on-primary-fixed-variant text-on-primary font-medium text-sm px-4 py-2 rounded-md transition-all duration-150 flex items-center gap-2 shadow-elevation-1 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply bg-white hover:bg-surface-container-low border border-outline-variant text-on-surface font-medium text-sm px-4 py-2 rounded-md transition-all duration-150 flex items-center gap-2;
+  }
+
+  .btn-ai {
+    @apply bg-ai-gradient text-white font-medium text-sm px-4 py-2 rounded-md transition-all duration-150 flex items-center gap-2 shadow-ai-glow hover:shadow-lg border border-white/10;
+  }
+
+  .btn-destructive {
+    @apply bg-white hover:bg-error-container border border-red-200 text-red-500 font-medium text-sm px-4 py-2 rounded-md transition-all duration-150 flex items-center gap-2;
+  }
+
+  .btn-ghost {
+    @apply hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-medium text-sm px-3 py-2 rounded-md transition-all duration-150 flex items-center gap-2;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-white rounded-xl border border-outline-variant/40 shadow-elevation-1;
+  }
+
+  .card-ai {
+    @apply bg-white rounded-xl border-l-4 border-ai-accent shadow-ai-glow;
+  }
+
+  /* Input */
+  .input {
+    @apply h-9 px-3 bg-white border border-outline-variant rounded-md text-on-surface text-sm placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all;
+  }
+
+  /* Badge variants */
+  .badge-active {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-success-container text-success;
+  }
+
+  .badge-inactive {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-error-container text-on-error-container;
+  }
+
+  .badge-pending {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-warning-container text-warning;
+  }
+
+  .badge-ai {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-ai-accent-container border border-violet-200 text-violet-700;
+  }
+
+  /* Table */
+  .table-header {
+    @apply bg-surface-container-low text-on-surface-variant text-[11px] font-semibold tracking-wider uppercase h-9 border-b border-outline-variant/40;
+  }
+
+  .table-row {
+    @apply border-b border-surface-container-low hover:bg-surface-container-low/50 h-11 transition-colors;
+  }
+
+  /* Sidebar nav item */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer;
+  }
+
+  .nav-item-active {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-primary-container bg-primary-fixed/50 cursor-pointer;
+  }
+
+  /* Metric tile */
+  .metric-tile {
+    @apply card p-5 flex flex-col gap-2;
+  }
+}
+
+@layer utilities {
+  .font-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .text-gradient-ai {
+    background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Sidebar width */
+  .sidebar-width {
+    width: 256px;
+  }
+}
+
