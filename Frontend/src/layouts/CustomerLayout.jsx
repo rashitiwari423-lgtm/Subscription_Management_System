@@ -17,51 +17,65 @@ export default function CustomerLayout() {
           </div>
           <div>
             <div className="font-bold text-sm text-on-surface">SubscriptIQ Customer Portal</div>
-            <div className="text-[10px] text-outline font-mono">ACCOUNT: {user?.name} (Nexus Dynamics)</div>
+            <div className="text-[10px] text-outline font-mono">
+              TENANT: {user?.company || 'Nexus Dynamics'} · {user?.name || 'Rahul Gupta'}
+            </div>
           </div>
         </div>
 
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center gap-1.5 sm:gap-2">
           <NavLink
             to="/customer/dashboard"
             className={({ isActive }) =>
-              `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                isActive ? 'bg-primary-container text-white' : 'text-on-surface-variant hover:bg-surface-container'
+              `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                isActive ? 'bg-primary text-white shadow-xs' : 'text-on-surface-variant hover:bg-surface-container'
               }`
             }
           >
             <LayoutDashboard className="w-4 h-4" />
-            <span>My Overview</span>
+            <span>Dashboard</span>
           </NavLink>
 
           <NavLink
             to="/customer/subscriptions"
             className={({ isActive }) =>
-              `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                isActive ? 'bg-primary-container text-white' : 'text-on-surface-variant hover:bg-surface-container'
+              `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                isActive ? 'bg-primary text-white shadow-xs' : 'text-on-surface-variant hover:bg-surface-container'
               }`
             }
           >
             <RefreshCw className="w-4 h-4" />
-            <span>Active Subscriptions</span>
+            <span>My Subscriptions</span>
           </NavLink>
 
           <NavLink
             to="/customer/invoices"
             className={({ isActive }) =>
-              `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                isActive ? 'bg-primary-container text-white' : 'text-on-surface-variant hover:bg-surface-container'
+              `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                isActive ? 'bg-primary text-white shadow-xs' : 'text-on-surface-variant hover:bg-surface-container'
               }`
             }
           >
             <Receipt className="w-4 h-4" />
-            <span>Billing & Invoices</span>
+            <span>Invoices & Payments</span>
+          </NavLink>
+
+          <NavLink
+            to="/customer/profile"
+            className={({ isActive }) =>
+              `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                isActive ? 'bg-primary text-white shadow-xs' : 'text-on-surface-variant hover:bg-surface-container'
+              }`
+            }
+          >
+            <User className="w-4 h-4" />
+            <span>My Profile</span>
           </NavLink>
         </nav>
 
         <div className="flex items-center gap-3">
           <button
-            onClick={() => { logout(); navigate('/login'); }}
+            onClick={() => { logout(); navigate('/'); }}
             className="flex items-center gap-1.5 text-xs text-on-surface-variant hover:text-error px-2.5 py-1.5 rounded-lg hover:bg-error-container/30 transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
