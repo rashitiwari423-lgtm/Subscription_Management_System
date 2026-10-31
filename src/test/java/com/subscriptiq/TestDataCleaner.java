@@ -1,5 +1,8 @@
 package com.subscriptiq;
 
+import com.subscriptiq.ai.action.repository.AiActionAuditLogRepository;
+import com.subscriptiq.ai.action.repository.AiActionExecutionRepository;
+import com.subscriptiq.ai.action.repository.AiActionRequestRepository;
 import com.subscriptiq.ai.repository.AiInsightRepository;
 import com.subscriptiq.ai.repository.AiQueryLogRepository;
 import com.subscriptiq.customer.repository.CustomerRepository;
@@ -27,6 +30,9 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TestDataCleaner {
 
+    private final AiActionAuditLogRepository aiActionAuditLogRepository;
+    private final AiActionExecutionRepository aiActionExecutionRepository;
+    private final AiActionRequestRepository aiActionRequestRepository;
     private final AiInsightRepository aiInsightRepository;
     private final AiQueryLogRepository aiQueryLogRepository;
     private final OptimizationInsightRepository optimizationInsightRepository;
@@ -49,6 +55,9 @@ public class TestDataCleaner {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void cleanAll() {
         // Child tables first to satisfy foreign key constraints:
+        aiActionAuditLogRepository.deleteAllInBatch();
+        aiActionExecutionRepository.deleteAllInBatch();
+        aiActionRequestRepository.deleteAllInBatch();
         aiInsightRepository.deleteAllInBatch();
         aiQueryLogRepository.deleteAllInBatch();
         optimizationInsightRepository.deleteAllInBatch();
