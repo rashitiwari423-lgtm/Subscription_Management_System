@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: subscriptiq
+
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:subscriptiq}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${DB_USERNAME:${DB_USER:root}}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+  mail:
+    host: ${MAIL_HOST:}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: ${SERVER_PORT:8080}
+
+application:
+  security:
+    jwt:
+      # Default secret for development - override via JWT_SECRET in production
+      secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+    reset-token:
+      expiration-minutes: 15
+  bootstrap:
+    initial-admin:
+      name: ${INITIAL_ADMIN_NAME:}
+      email: ${INITIAL_ADMIN_EMAIL:}
+      password: ${INITIAL_ADMIN_PASSWORD:}
+  mail:
+    from: ${MAIL_FROM:noreply@subscriptiq.com}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+subscriptiq:
+  billing:
+    scheduler:
+      enabled: ${BILLING_SCHEDULER_ENABLED:true}
+      cron: ${BILLING_SCHEDULER_CRON:0 0 1 * * *}
+    invoice:
+      due-days: ${INVOICE_DUE_DAYS:7}
